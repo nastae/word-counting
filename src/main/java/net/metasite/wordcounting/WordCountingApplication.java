@@ -8,7 +8,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
-
 @ComponentScan({"net.metasite.wordcounting","net.metasite.wordcounting.controller"})
 @SpringBootApplication
 public class WordCountingApplication extends SpringBootServletInitializer {
@@ -18,5 +17,3 @@ public class WordCountingApplication extends SpringBootServletInitializer {
 	}
 	
 }
-
-

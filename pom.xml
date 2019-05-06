@@ -9,7 +9,7 @@
 	<packaging>jar</packaging>
 
 	<name>word-counting</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Word counting</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -22,52 +22,38 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
+		<springframework.boot.version>2.1.4.RELEASE</springframework.boot.version>
+		<tika.parser.version>1.18</tika.parser.version>
 	</properties>
 
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+			<version>${springframework.boot.version}</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<optional>true</optional>
+			<version>${springframework.boot.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
+			<version>${springframework.boot.version}</version>
 			<scope>test</scope>
 		</dependency>
-		
-		<dependency>
-	      <groupId>javax.servlet</groupId>
-	      <artifactId>jstl</artifactId>
-	    </dependency>
-
-	    <dependency>
-	      <groupId>org.apache.tomcat.embed</groupId>
-	      <artifactId>tomcat-embed-jasper</artifactId>
-	    </dependency>
-
-	    <dependency>
-	      <groupId>org.eclipse.jdt.core.compiler</groupId>
-	      <artifactId>ecj</artifactId>
-	      <version>4.6.1</version>
-	    </dependency>
-		
 		<dependency>
 		    <groupId>org.apache.tika</groupId>
 		    <artifactId>tika-parsers</artifactId>
-		    <version>1.18</version>
+		    <version>${tika.parser.version}</version>
 		</dependency>
 		<dependency>
-		  	<groupId>org.slf4j</groupId>
-		  	<artifactId>slf4j-simple</artifactId>
-		  	<version>1.7.25</version>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+			<version>${springframework.boot.version}</version>
 		</dependency>
-		
 	</dependencies>
 
 	<build>
@@ -76,46 +62,14 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
-
-	<repositories>
-		<repository>
-			<id>spring-snapshots</id>
-			<name>Spring Snapshots</name>
-			<url>https://repo.spring.io/snapshot</url>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>spring-milestones</id>
-			<name>Spring Milestones</name>
-			<url>https://repo.spring.io/milestone</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
-
-	<pluginRepositories>
-		<pluginRepository>
-			<id>spring-snapshots</id>
-			<name>Spring Snapshots</name>
-			<url>https://repo.spring.io/snapshot</url>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</pluginRepository>
-		<pluginRepository>
-			<id>spring-milestones</id>
-			<name>Spring Milestones</name>
-			<url>https://repo.spring.io/milestone</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</pluginRepository>
-	</pluginRepositories>
-
-
 </project>
