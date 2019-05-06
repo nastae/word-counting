@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Word Counting</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 5px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div id="global">
+        <form method="post" enctype="multipart/form-data" th:action="@{/file/convert}" th:object="${files}">
+            <table>
+                <tr>
+                    <td>
+                        File upload:
+                    </td>
+                    <td>
+                        <input type="file" multiple="multiple" th:field="*{files}" name="file" accept=".pdf, .odt, .ods, .odp, .doc, .docx, .xls, .txt, .html, .xml, .epub"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                        <input type="submit" value="Convert"/>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    </br>
+    <div th:if="${words!=null and !words.empty}">
+        <h4>Words starting with A-G</h4>
+        <table>
+            <tr>
+                <td>
+                    <a>Word</a>
+                </td>
+                <td>
+                    <a>Count</a>
+                </td>
+            </tr>
+            <tr th:each="word: ${words.get('a-g')}">
+                <td>
+                    <a th:text="${word.word}"></a>
+                </td>
+                <td>
+                    <a th:text="${word.count}"></a>
+                </td>
+            </tr>
+        </table>
+        <h4>Words starting with H-N</h4>
+        <table>
+            <tr>
+                <td>
+                    <a>Word</a>
+                </td>
+                <td>
+                    <a>Count</a>
+                </td>
+            </tr>
+            <tr th:each="word: ${words.get('h-n')}">
+                <td>
+                    <a th:text="${word.word}"></a>
+                </td>
+                <td>
+                    <a th:text="${word.count}"></a>
+                </td>
+            </tr>
+        </table>
+        <h4>Words starting with O-U</h4>
+        <table>
+            <tr>
+                <td>
+                    <a>Word</a>
+                </td>
+                <td>
+                    <a>Count</a>
+                </td>
+            </tr>
+            <tr th:each="word: ${words.get('o-u')}">
+                <td>
+                    <a th:text="${word.word}"></a>
+                </td>
+                <td>
+                    <a th:text="${word.count}"></a>
+                </td>
+            </tr>
+        </table>
+        <h4>Words starting with V-Z</h4>
+        <table>
+            <tr>
+                <td>
+                    <a>Word</a>
+                </td>
+                <td>
+                    <a>Count</a>
+                </td>
+            </tr>
+            <tr th:each="word: ${words.get('v-z')}">
+                <td>
+                    <a th:text="${word.word}"></a>
+                </td>
+                <td>
+                    <a th:text="${word.count}"></a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

@@ -4,6 +4,10 @@ public class Word {
 	private String word;
 	private int count;
 
+	public Word(String word) {
+		this(word, 1);
+	}
+
 	public Word(String word, int count) {
 		super();
 		this.word = word;
@@ -50,5 +54,4 @@ public class Word {
 	public String toString() {
 		return getWord() + " " + getCount();
 	}
-
 }
