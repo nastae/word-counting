@@ -1,3 +1,3 @@
 # word-counting
 
-User upload any number of files and software counts words.
+User uploads any number of (doc, pdf, text, etc) files and software counts words.
