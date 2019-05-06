@@ -1,4 +1,17 @@
-# word-counting
+# Word Counting
 
-https://gyazo.com/5d6827a5bfbab164357520a7814cc233
-https://gyazo.com/854ade9964b9c3f1d28bdf8db185115a
+User uploads any number of (doc, pdf, text, etc) files, presses "Convert" button and WEB application displays every word and its count in files. These words are divided into 4 groups by starting letter: 
+* A-G
+* H-N
+* O-U
+* V-Z
+
+## Supported document types
+
+* PDF
+* ODT, ODS, ODP
+* DOC, DOCX, XLS
+* TXT
+* HTML
+* XML
+* EPUB
