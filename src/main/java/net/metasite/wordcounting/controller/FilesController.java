@@ -1,6 +1,6 @@
 package net.metasite.wordcounting.controller;
 
-import net.metasite.wordcounting.counting.WordCountingProcess;
+import net.metasite.wordcounting.counting.WordCounting;
 import net.metasite.wordcounting.word.Word;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,7 +19,7 @@ import java.util.Set;
 public class FilesController {
 
 	@Autowired
-	private WordCountingProcess counting;
+	private WordCounting counting;
 
 	private final HashMap<String, Set<Word>> wordsGroup = new HashMap<>();
 
@@ -31,7 +31,7 @@ public class FilesController {
 	@RequestMapping(value = "/convert", method = RequestMethod.POST)
 	public String convertWords(@ModelAttribute("files") Files upload) {
 		wordsGroup.clear();
-		counting.countWordsFromFiles(wordsGroup, upload.files);
+		wordsGroup.putAll(counting.countWordsFromFiles(upload.files));
 		return "index";
 	}
 

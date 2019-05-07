@@ -1,6 +1,5 @@
 package net.metasite.wordcounting.counting;
 
-import net.metasite.wordcounting.io.DocumentReader;
 import net.metasite.wordcounting.io.DocumentReaderFactory;
 import net.metasite.wordcounting.word.Word;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,36 +7,34 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.*;
 import java.util.stream.Stream;
 
 @Service
-public class WordCountingProcess {
+public class WordCounting {
 
     @Autowired
     private DocumentReaderFactory factory;
 
-    public void countWordsFromFiles(HashMap<String, Set<Word>> wordsGroup, List<MultipartFile> files) {
-        wordsGroup.putAll(files.parallelStream()
-                                .map(this::readLinesFromFile)
-                                .flatMap(x-> x.stream().flatMap(Stream::of))
-                                .flatMap(text -> Stream.of(text.split("\\W")))
-                                .map(Word::new)
-                                .collect(WordsGroup::new, WordsGroup::accept, WordsGroup::combine)
-                                .getWordsGroup());
+    public HashMap<String, Set<Word>> countWordsFromFiles(List<MultipartFile> files) {
+        return files.parallelStream()
+                .map(this::readLinesFromFile)
+                .flatMap(x-> x.map(Stream::of).orElseGet(Stream::empty))
+                .flatMap(text -> Stream.of(text.split("\\W")))
+                .map(Word::new)
+                .collect(WordsGroup::new, WordsGroup::accept, WordsGroup::combine)
+                .getWordsGroup();
     }
 
     private Optional<String> readLinesFromFile(MultipartFile file) {
-        final Optional<DocumentReader> reader = factory.getDocumentReader(file.getOriginalFilename());
-        if (reader.isPresent()) {
-            try {
-                return reader.get().read(file.getInputStream());
+        return factory.getDocumentReader(file.getOriginalFilename()).map(r -> {
+            try (InputStream stream = file.getInputStream()) {
+                return r.read(stream);
             } catch (IOException e) {
                 return Optional.<String>empty();
             }
-        } else {
-            return Optional.<String>empty();
-        }
+        }).orElseGet(Optional::empty);
     }
 
     class WordsGroup {

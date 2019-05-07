@@ -1,6 +1,7 @@
 package net.metasite.wordcounting.word;
 
 public class Word {
+
 	private String word;
 	private int count;
 
@@ -41,13 +42,6 @@ public class Word {
 	@Override
 	public int hashCode() {
 		return getWord().hashCode();
-	}
-	
-	public String getFirstSymbol () {
-		if (word != null && word.length() > 0) {
-			return word.substring(0, 1);
-		}
-		return "";
 	}
 
 	@Override

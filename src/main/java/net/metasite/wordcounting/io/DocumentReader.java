@@ -30,14 +30,6 @@ public class DocumentReader {
 			result = handler.toString();
 		} catch (IOException | SAXException | TikaException e) {
 			return Optional.empty();
-		} finally {
-			if (inputstream != null) {
-				try {
-					inputstream.close();
-				} catch (IOException e) {
-					return Optional.empty();
-				}
-			}
 		}
 		return Optional.ofNullable(result);
 	}
