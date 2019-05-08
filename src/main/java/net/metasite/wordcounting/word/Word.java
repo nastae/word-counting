@@ -23,12 +23,21 @@ public class Word {
 		return count;
 	}
 
-	public void setCount(int count) {
-		this.count = count;
-	}
-
 	public void increaseCount() {
 		this.count++;
+	}
+
+	public String getGroup() {
+		if (word.matches("^([a-gA-G].*)")) {
+			return "a-g";
+		} else if (word.matches("^([h-nH-N].*)")) {
+			return "h-n";
+		} else if (word.matches("^([o-uO-U].*)")) {
+			return "o-u";
+		} else if (word.matches("^([v-zV-Z].*)")) {
+			return "v-z";
+		}
+		return "none";
 	}
 
 	@Override

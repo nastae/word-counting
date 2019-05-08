@@ -1,6 +1,6 @@
 package net.metasite.wordcounting.controller;
 
-import net.metasite.wordcounting.counting.WordCounting;
+import net.metasite.wordcounting.counting.WordCountingProcess;
 import net.metasite.wordcounting.word.Word;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,7 +19,7 @@ import java.util.Set;
 public class FilesController {
 
 	@Autowired
-	private WordCounting counting;
+	private WordCountingProcess counting;
 
 	private final HashMap<String, Set<Word>> wordsGroup = new HashMap<>();
 

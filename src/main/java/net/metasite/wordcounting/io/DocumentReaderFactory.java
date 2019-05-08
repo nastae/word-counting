@@ -14,30 +14,21 @@ import java.util.Optional;
 @Component
 public class DocumentReaderFactory {
 
-	private DocumentReader epubDocumentReader = new DocumentReader(new EpubParser());
-	private DocumentReader xmlDocumentReader = new DocumentReader(new XMLParser());
-	private DocumentReader htmlDocumentReader = new DocumentReader(new HtmlParser());
-	private DocumentReader textDocumentReader = new DocumentReader(new TXTParser());
-	private DocumentReader msOfficeDocumentReader = new DocumentReader(new OOXMLParser());
-	private DocumentReader odfDocumentReader = new DocumentReader(new OpenDocumentParser());
-	private DocumentReader pdfDocumentReader = new DocumentReader(new PDFParser());
-
 	public Optional<DocumentReader> getDocumentReader (String fileName) {
 		if (fileName.endsWith(".pdf"))
-			return Optional.ofNullable(pdfDocumentReader);
+			return Optional.of(new DocumentReader(new PDFParser()));
 		else if (fileName.endsWith(".odt") || fileName.endsWith(".ods") || fileName.endsWith(".odp"))
-			return Optional.ofNullable(odfDocumentReader);
+			return Optional.of(new DocumentReader(new OpenDocumentParser()));
 		else if (fileName.endsWith(".doc") || fileName.endsWith(".docx") || fileName.endsWith(".xls"))
-			return Optional.ofNullable(msOfficeDocumentReader);
+			return Optional.of(new DocumentReader(new OOXMLParser()));
 		else if (fileName.endsWith(".txt"))
-			return Optional.ofNullable(textDocumentReader);
+			return Optional.of(new DocumentReader(new TXTParser()));
 		else if (fileName.endsWith(".html"))
-			return Optional.ofNullable(htmlDocumentReader);
+			return Optional.of(new DocumentReader(new HtmlParser()));
 		else if (fileName.endsWith(".xml"))
-			return Optional.ofNullable(xmlDocumentReader);
+			return Optional.of(new DocumentReader(new XMLParser()));
 		else if (fileName.endsWith(".epub"))
-			return Optional.ofNullable(epubDocumentReader);
-		
+			return Optional.of(new DocumentReader(new EpubParser()));
 		return Optional.empty();
 	}
 }

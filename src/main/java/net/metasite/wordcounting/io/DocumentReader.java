@@ -15,7 +15,7 @@ public class DocumentReader {
 
 	protected AbstractParser parser;
 
-	protected BodyContentHandler handler = new BodyContentHandler(-1);
+	protected BodyContentHandler handler;
 	protected Metadata metadata = new Metadata();
 	protected ParseContext pcontext = new ParseContext();
 
@@ -23,11 +23,12 @@ public class DocumentReader {
 		this.parser = parser;
 	}
 
-	public Optional<String> read(InputStream inputstream) {
-		String result;
+	public synchronized Optional<String> read(InputStream inputstream) {
+		handler = new BodyContentHandler(-1);
+		String result = "";
 		try {
-			parser.parse(inputstream, handler, metadata,pcontext);
-			result = handler.toString();
+            parser.parse(inputstream, handler, metadata, pcontext);
+            result = handler.toString();
 		} catch (IOException | SAXException | TikaException e) {
 			return Optional.empty();
 		}
